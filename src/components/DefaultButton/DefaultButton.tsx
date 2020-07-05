@@ -1,10 +1,9 @@
 import React from 'react';
 import './DefaultButton.scss'
 
-function DefaultButton() {
+function DefaultButton(props: any) {
   return (
-    <div className="DefaultButton"> Create a free account </div>
-
+    <div className="DefaultButton">{props.children}</div>
   )
 }
 

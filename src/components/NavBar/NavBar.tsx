@@ -1,13 +1,13 @@
 import React from 'react';
 import './NavBar.scss'
 import { FaHandsHelping } from 'react-icons/fa';
-import DefaultButton from '../DefaultButton/DefaultButton';
+import NavBarButtons from './NavBarButtons/NavBarButtons';
 
 function NavBar() {
   return (
     <header className="NavBar">
       <div> <FaHandsHelping /> SWApp </div>
-      <DefaultButton />
+      <NavBarButtons />
     </header>
   )
 }
