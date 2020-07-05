@@ -1,0 +1,20 @@
+@import 'node_modules/nord/src/sass/nord.scss';
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: $nord1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  font-family: kaisar;
+  color: $nord4;
+}
+
+.App-link {
+  color: #61dafb;
+}
