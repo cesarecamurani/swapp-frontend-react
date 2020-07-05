@@ -1,13 +1,14 @@
 import React from 'react';
-import classes from './NavBar.scss'
+import './NavBar.scss'
 import { FaHandsHelping } from 'react-icons/fa';
+import DefaultButton from '../DefaultButton/DefaultButton';
 
 function NavBar() {
   return (
-    <header className={classes.NavBar}>
-    <div>MENU</div>
-   
-  </header>
+    <header className="NavBar">
+      <div> <FaHandsHelping /> SWApp </div>
+      <DefaultButton />
+    </header>
   )
 }
 
