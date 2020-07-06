@@ -6,7 +6,7 @@ import NavBarButtons from './NavBarButtons/NavBarButtons';
 function NavBar() {
   return (
     <header className="NavBar">
-      <div> <FaHandsHelping /> SWApp </div>
+      <div className="title"> <FaHandsHelping /> SWApp </div>
       <NavBarButtons />
     </header>
   )
