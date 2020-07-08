@@ -1,13 +1,9 @@
 import React from 'react';
 import './NavBarButtons.scss'
-import DefaultButton from '../../DefaultButton/DefaultButton';
 
-function NavBarButtons() {
+function NavBarButtons(props: any) {
   return (
-    <header className="NavBarButtons">
-      <DefaultButton> Login </DefaultButton>
-      <DefaultButton> Create a new account </DefaultButton>
-    </header>
+    <div className="NavBarButtons">{props.children}</div>
   )
 }
 

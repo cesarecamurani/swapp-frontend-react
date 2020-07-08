@@ -6,10 +6,8 @@ import LoginForm from '../components/LoginForm/LoginForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar />
-      </header>
+    <div className='App'>
+      <NavBar />
       <LoginForm />
       <Footer />
     </div>

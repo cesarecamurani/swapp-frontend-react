@@ -1,6 +1,6 @@
 @import 'node_modules/nord/src/sass/nord.scss';
 
-.DefaultButton {
+.NavBarButton {
   text-align: center;
   background-color: $nord10;
   color: $nord4;
@@ -14,7 +14,7 @@
   border-radius: 4px;
 }
 
-.DefaultButton:hover {
+.NavBarButton:hover {
   background: $nord14;
   color: $nord2;
 }
