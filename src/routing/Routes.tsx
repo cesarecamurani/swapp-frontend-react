@@ -4,7 +4,7 @@ import {
   HOME_PATH,
   LOGIN_PATH,
   REGISTER_PATH
-} from '../paths'
+} from '../utils/paths'
 import Homepage from '../components/Homepage/Homepage';
 import LoginForm from '../components/LoginForm/LoginForm';
 import RegisterForm from '../components/RegisterForm/RegisterForm';

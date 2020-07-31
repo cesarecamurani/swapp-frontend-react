@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import * as Nord from '../nordPalette';
+import * as Nord from '../utils/nordPalette';
 
 export default makeStyles(() => ({
   app: {

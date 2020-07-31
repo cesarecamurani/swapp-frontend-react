@@ -4,8 +4,8 @@ import { FaHandsHelping } from 'react-icons/fa';
 // import { GiWingfoot } from 'react-icons/gi';
 import NavBarButtons from '../NavbarButtons/NavbarButtons';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import NavBarButton from '../NavbarButton/NavbarButton';
-import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../paths';
+import NavbarButton from '../NavbarButton/NavbarButton';
+import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../utils/paths';
 // import SearchBar from './SearchBar/SearchBar';
 
 export default function NavBar() {
@@ -20,10 +20,10 @@ export default function NavBar() {
         {/* <GiWingfoot /> */}
         <NavBarButtons>
           <Link className={classes.textLink} to={LOGIN_PATH}>
-            <NavBarButton> Login </NavBarButton>
+            <NavbarButton> Login </NavbarButton>
           </Link>
           <Link className={classes.textLink} to={REGISTER_PATH}>
-            <NavBarButton> Create a new account </NavBarButton>
+            <NavbarButton> Create a new account </NavbarButton>
           </Link>
         </NavBarButtons>
       </Router>
