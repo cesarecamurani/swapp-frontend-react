@@ -1,11 +1,12 @@
 import React from 'react';
+import { FaHandsHelping } from 'react-icons/fa';
 import './Footer.scss'
 
 function Footer() {
   return (
-    <header className="Footer">
-      <div> SWApp by Cesare Camurani </div>
-    </header>
+    <div className="Footer">
+      <FaHandsHelping /> SWApp by Cesare Camurani
+    </div>
   )
 }
 

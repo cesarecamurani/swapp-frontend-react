@@ -4,11 +4,13 @@ import { FaHandsHelping } from 'react-icons/fa';
 import NavBarButtons from './NavBarButtons/NavBarButtons';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import NavBarButton from './NavBarButtons/NavBarButton/NavBarButton';
+import SearchBar from './SearchBar/SearchBar';
 
 function NavBar() {
   return (
-    <div className="NavBar">
+    <div className='NavBar'>
       <div className="title"><FaHandsHelping /> SWApp </div>
+      <SearchBar />
       <NavBarButtons>
         <Router>
           <Link to='/login' style={{ textDecoration: 'none' }}>
