@@ -1,17 +1,16 @@
 import React from 'react';
-import './App.scss';
-import NavBar from '../components/NavBar/NavBar';
+import useStyles from './styles';
+import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-// import LoginForm from '../components/LoginForm/LoginForm';
 
-function App() {
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className='App'>
-      <NavBar />
+    <div className={classes.app}>
+      <Navbar />
 
       <Footer />
     </div>
   );
 }
-
-export default App;

@@ -1,0 +1,16 @@
+export const polarNight0 = '#2e3440';
+export const polarNight1 = '#3b4252';
+export const polarNight2 = '#434c5e';
+export const polarNight3 = '#4c566a';
+export const snowStorm0 = '#d8dee9';
+export const snowStorm1 = '#e5e9f0';
+export const snowStorm2 = '#eceff4';
+export const frost0 = '#8fbcbb';
+export const frost1 = '#88c0d0';
+export const frost2 = '#81a1c1';
+export const frost3 = '#5e81ac';
+export const aurora0 = '#bf616a';
+export const aurora1 = '#d08770';
+export const aurora2 = '#ebcb8b';
+export const aurora3 = '#a3be8c';
+export const aurora4 = '#b48ead';

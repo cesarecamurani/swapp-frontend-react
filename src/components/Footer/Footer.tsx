@@ -1,13 +1,13 @@
 import React from 'react';
+import useStyles from './styles';
 import { FaHandsHelping } from 'react-icons/fa';
-import './Footer.scss'
 
-function Footer() {
+export default function Footer() {
+  const classes = useStyles();
+
   return (
-    <div className="Footer">
+    <div className={classes.footer}>
       <FaHandsHelping /> SWApp by Cesare Camurani
     </div>
   )
 }
-
-export default Footer
