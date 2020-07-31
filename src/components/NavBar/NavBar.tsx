@@ -1,28 +1,30 @@
 import React from 'react';
 import './NavBar.scss'
 import { FaHandsHelping } from 'react-icons/fa';
+import { GiWingfoot } from 'react-icons/gi';
 import NavBarButtons from './NavBarButtons/NavBarButtons';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import NavBarButton from './NavBarButtons/NavBarButton/NavBarButton';
-import SearchBar from './SearchBar/SearchBar';
+import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../paths';
+// import SearchBar from './SearchBar/SearchBar';
 
-function NavBar() {
+export default function NavBar() {
   return (
     <div className='NavBar'>
-      <div className="title"><FaHandsHelping /> SWApp </div>
-      <SearchBar />
-      <NavBarButtons>
-        <Router>
-          <Link to='/login' style={{ textDecoration: 'none' }}>
+      <Router>
+        <Link className='text-link' to={HOME_PATH} >
+          <div className='title'><FaHandsHelping /> SWApp </div>
+        </Link>
+        <GiWingfoot />
+        <NavBarButtons>
+          <Link className='text-link' to={LOGIN_PATH}>
             <NavBarButton> Login </NavBarButton>
           </Link>
-          <Link to='/register' style={{ textDecoration: 'none' }}>
-            <NavBarButton component={Link} to={'/register'}> Create a new account </NavBarButton>
+          <Link className='text-link' to={REGISTER_PATH}>
+            <NavBarButton> Create a new account </NavBarButton>
           </Link>
-        </Router>
-      </NavBarButtons>
+        </NavBarButtons>
+      </Router>
     </div>
   )
 }
-
-export default NavBar

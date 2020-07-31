@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 
-export default function LoginForm(props: any) {
+export default function RegisterForm(props: any) {
   return (
     <div />
   );
