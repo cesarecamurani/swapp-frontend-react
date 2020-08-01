@@ -12,7 +12,7 @@ export default function LoginForm() {
       <div className={classes.form}>
         <div className={classes.welcomeMessage}> Welcome </div>
         <p className={classes.p}> 
-          Please LOGIN below and start SWApping around! 
+          Please login below and start SWApping around! 
         </p>
         <input 
           className={classes.formInput}
