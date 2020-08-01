@@ -6,8 +6,8 @@ import {
   REGISTER_PATH
 } from '../utils/paths'
 import Homepage from '../components/Homepage/Homepage';
-import LoginForm from '../components/LoginForm/LoginForm';
-import RegisterForm from '../components/RegisterForm/RegisterForm';
+import LoginForm from '../components/forms/LoginForm/LoginForm';
+import RegisterForm from '../components/forms/RegisterForm/RegisterForm';
 
 export default function Routes() {
   return (
