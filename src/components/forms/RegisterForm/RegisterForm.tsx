@@ -11,9 +11,9 @@ export default function RegisterForm(props: any) {
   return (
     <div className={classes.page}>
       <div className={classes.form}>
-        <div className={classes.welcomeMessage}> Welcome </div>
+        <div className={classes.welcomeMessage}> Welcome ! </div>
         <p className={classes.p}> 
-          Please register below to start SWApping around! 
+          Please register below and start SWApping around! 
         </p>
         <input 
           className={classes.formInput}
@@ -40,7 +40,7 @@ export default function RegisterForm(props: any) {
           </Link>
             )
         </p>
-        <NavbarButton> Register now! </NavbarButton>
+        <NavbarButton> Register </NavbarButton>
         <p className={classes.p}> 
           Already registered? &nbsp; 
           <Link className={classes.textLink} to={LOGIN_PATH}> 

@@ -9,8 +9,14 @@ export default makeStyles(() => ({
   p: {
     fontSize: '16px'
   },
+  error: {
+    color: `${Nord.aurora2}`,
+    fontSize: '14px',
+    fontWeight: 'bold'
+  },
   welcomeMessage: {
-    fontSize: '50px'
+    fontSize: '50px',
+    color: `${Nord.aurora3}`,
   },
   textLink: {
     color: `${Nord.aurora3}`,
@@ -37,7 +43,6 @@ export default makeStyles(() => ({
     background: `${Nord.snowStorm0}`,
     width: '96.5%',
     border: 0,
-    margin: '0 0 15px',
     padding: '10px',
     borderRadius: '4px',
     boxSizing: 'border-box',

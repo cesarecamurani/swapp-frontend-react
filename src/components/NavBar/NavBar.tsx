@@ -1,6 +1,5 @@
 import React from 'react';
 import useStyles from './styles';
-// import { FaHandsHelping } from 'react-icons/fa';
 import { GiWingfoot } from 'react-icons/gi';
 import NavBarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
