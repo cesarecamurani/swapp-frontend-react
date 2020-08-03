@@ -85,7 +85,7 @@ export default function RegisterForm() {
                 name='confirm_password'
                 placeholder='Please confirm Password'
               />
-              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px' }}>
+              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px', cursor: 'pointer' }}>
                 {
                   visiblePassword ?
                   <FontAwesomeIcon icon={faEye} /> :

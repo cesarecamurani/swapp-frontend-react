@@ -22,30 +22,38 @@ const validationSchema = Yup.object().shape({
 })
 
 interface Props {
-  handleSubmit: FormEventHandler;
-  handleChange: FormEventHandler;
-  setFieldTouched: (field: string, value: any, shouldValidate?: boolean) => void;
+  handleSubmit: FormEventHandler
+  handleChange: FormEventHandler
+  setFieldTouched: (field: string, value: any, shouldValidate?: boolean) => void
+  isValid: boolean
+  dirty: boolean
   touched: { [field: string]: boolean }
-  values: { [field: string]: any };
-  errors: { [field: string]: any };
+  values: { [field: string]: any }
+  errors: { [field: string]: any }
 }
 
 export default function LoginForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
 
-  function togglePasswordVisibility() {
+  const togglePasswordVisibility = () => {
     setVisiblePassword(!visiblePassword)
   }
 
   return (
     <div className={classes.page}>
       <Formik
-        initialValues={{ email: '', password: '', visiblePassword: false }}
+        initialValues={{
+          email: '',
+          password: '',
+          visiblePassword: false,
+          dirty: true,
+          isValid: false
+        }}
         validationSchema={validationSchema}
         onSubmit={values => { console.log(values) }}
       >
-        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors }: Props) => (
+        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
           <form className={classes.form} onSubmit={handleSubmit}>
             <div className={classes.welcomeMessage}> Welcome!</div>
             <p className={classes.p}>
@@ -71,7 +79,7 @@ export default function LoginForm() {
                 name='password'
                 placeholder='Password'
               />
-              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px' }}>
+              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px', cursor: 'pointer' }}>
                 {
                   visiblePassword ?
                   <FontAwesomeIcon icon={faEye} /> :
@@ -80,7 +88,7 @@ export default function LoginForm() {
               </i>
             </div>
             { errors.password && touched.password ? <p className={classes.error}>{errors.password}</p> : ''}
-            <NavbarButton type='submit'> Login </NavbarButton>
+            <NavbarButton type='submit' disabled={!(isValid && dirty)}> Login </NavbarButton>
             <p className={classes.p}>
               Not registered yet? &nbsp;
               <Link className={classes.textLink} to={REGISTER_PATH}>
