@@ -10,7 +10,7 @@ export default makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center',
     fontSize: `calc(20px + 2vmin)`,
-    fontFamily: 'lorenza',
+    fontFamily: 'Arcon',
     fontWeight: 'lighter',
     color: `${Nord.snowStorm0}`,
   }

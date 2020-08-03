@@ -7,11 +7,11 @@ export default makeStyles(() => ({
     margin: '100px'
   },
   p: {
-    fontSize: '16px'
+    fontSize: '18px'
   },
   error: {
-    color: `${Nord.aurora2}`,
-    fontSize: '14px',
+    color: `${Nord.aurora0}`,
+    fontSize: '18px',
     fontWeight: 'bold'
   },
   welcomeMessage: {
@@ -26,19 +26,23 @@ export default makeStyles(() => ({
       textDecoration: 'underline'
     }
   },
+  inputContainer: {
+    width: '100%'
+  },
   form: {
     position: 'inherit',
     alignContent:' center',
     zIndex: 1,
     background: `${Nord.polarNight3}`,
-    maxWidth: '300px',
+    maxWidth: '410px',
+    width: '410px',
     padding: '40px',
     borderRadius: '6px',
     textAlign: 'center',
     boxShadow: `0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)`
   },
   formInput: {
-    fontFamily: 'lorenza',
+    fontFamily: 'Arcon',
     outline: 0,
     background: `${Nord.snowStorm0}`,
     width: '96.5%',
@@ -46,7 +50,7 @@ export default makeStyles(() => ({
     padding: '10px',
     borderRadius: '4px',
     boxSizing: 'border-box',
-    fontSize: '15px',
+    fontSize: '18px',
     '&:hover': {
       background: `${Nord.aurora3}`
     }

@@ -11,7 +11,6 @@ export default makeStyles(() => ({
     cursor: 'pointer',
     font: 'inherit',
     fontSize: '18px',
-    fontWeight: 500,
     padding: '8px',
     paddingTop: '4px',
     paddingBottom: '4px',

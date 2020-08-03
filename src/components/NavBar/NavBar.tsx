@@ -1,13 +1,13 @@
 import React from 'react';
 import useStyles from './styles';
 import { GiWingfoot } from 'react-icons/gi';
-import NavBarButtons from '../NavbarButtons/NavbarButtons';
+import NavbarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
 import NavbarButton from '../NavbarButton/NavbarButton';
 import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../utils/paths';
 // import SearchBar from './SearchBar/SearchBar';
 
-export default function NavBar() {
+export default function Navbar() {
   const classes = useStyles();
 
   return (
@@ -15,14 +15,14 @@ export default function NavBar() {
       <Link className={classes.textLink} to={HOME_PATH} >
         <div className={classes.title}><GiWingfoot /> SWApp </div>
       </Link>
-      <NavBarButtons>
+      <NavbarButtons>
         <Link className={classes.textLink} to={LOGIN_PATH}>
           <NavbarButton> Login </NavbarButton>
         </Link>
         <Link className={classes.textLink} to={REGISTER_PATH}>
-          <NavbarButton> Create a new account </NavbarButton>
+          <NavbarButton> Register </NavbarButton>
         </Link>
-      </NavBarButtons>
+      </NavbarButtons>
     </div>
   )
 }
