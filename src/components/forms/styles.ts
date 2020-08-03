@@ -4,7 +4,7 @@ import * as Nord from '../../utils/nordPalette'
 export default makeStyles(() => ({
   page: {
     padding: '0 0 0 0',
-    margin: '100px'
+    margin: '130px'
   },
   p: {
     fontSize: '18px'

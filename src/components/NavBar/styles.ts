@@ -3,7 +3,7 @@ import * as Nord from '../../utils/nordPalette'
 
 export default makeStyles(() => ({
   navbar: {
-    height: '75px',
+    height: '90px',
     width: '100%',
     position: 'fixed',
     top: 0,

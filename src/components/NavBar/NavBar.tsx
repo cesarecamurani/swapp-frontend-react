@@ -14,6 +14,9 @@ export default function Navbar() {
     <div className={classes.navbar}>
       <Link className={classes.textLink} to={HOME_PATH} >
         <div className={classes.title}><GiWingfoot /> SWApp </div>
+        <p style={
+          { fontSize: '14px', margin: 'inherit' }
+        }> All you need is Swapp! </p>
       </Link>
       <NavbarButtons>
         <Link className={classes.textLink} to={LOGIN_PATH}>

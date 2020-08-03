@@ -34,7 +34,7 @@ export default function LoginForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
 
-  function togglePasswordVisiblity() {
+  function togglePasswordVisibility() {
     setVisiblePassword(!visiblePassword)
   }
 
@@ -71,14 +71,13 @@ export default function LoginForm() {
                 name='password'
                 placeholder='Password'
               />
-              <i onClick={togglePasswordVisiblity} style={{ fontSize: '30px' }}>
+              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px' }}>
                 {
                   visiblePassword ?
                   <FontAwesomeIcon icon={faEye} /> :
                   <FontAwesomeIcon icon={faEyeSlash} />
                 }
               </i>
-
             </div>
             { errors.password && touched.password ? <p className={classes.error}>{errors.password}</p> : ''}
             <NavbarButton type='submit'> Login </NavbarButton>

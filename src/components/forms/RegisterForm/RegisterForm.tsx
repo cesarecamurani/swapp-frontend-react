@@ -1,8 +1,10 @@
-import React, { FormEventHandler } from 'react';
+import React, { FormEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
 import NavbarButton from '../../NavbarButton/NavbarButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
@@ -34,6 +36,11 @@ interface Props {
 
 export default function RegisterForm() {
   const classes = useStyles();
+  const [visiblePassword, setVisiblePassword] = useState(false)
+
+  function togglePasswordVisibility() {
+    setVisiblePassword(!visiblePassword)
+  }
 
   return (
     <div className={classes.page}>
@@ -60,23 +67,32 @@ export default function RegisterForm() {
             { errors.email && touched.email ? <p className={classes.error}>{errors.email}</p> : ''}
             <input
               className={classes.formInput}
-              type='password'
+              type={ visiblePassword ? 'text' : 'password' }
               onChange={handleChange}
               onBlur={() => setFieldTouched('password', true)}
               value={values.password}
               name='password'
-              placeholder='Password (minimum 8 characters)'
+              placeholder='Password (min 8 chars - 1 num - 1 caps)'
             />
             { errors.password && touched.password ? <p className={classes.error}>{errors.password}</p> : ''}
-            <input
-              className={classes.formInput}
-              type='password'
-              onChange={handleChange}
-              onBlur={() => setFieldTouched('confirm_password', true)}
-              value={values.confirm_password}
-              name='confirm_password'
-              placeholder='Please confirm Password'
-            />
+            <div className={classes.inputContainer}>
+              <input
+                className={classes.formInput}
+                type={ visiblePassword ? 'text' : 'password' }
+                onChange={handleChange}
+                onBlur={() => setFieldTouched('confirm_password', true)}
+                value={values.confirm_password}
+                name='confirm_password'
+                placeholder='Please confirm Password'
+              />
+              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px' }}>
+                {
+                  visiblePassword ?
+                  <FontAwesomeIcon icon={faEye} /> :
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                }
+              </i>
+            </div>
             { errors.confirm_password && touched.confirm_password ? <p className={classes.error}>{errors.confirm_password}</p> : ''}
             <p className={classes.p}>
               <Form.Group controlId='formBasicCheckbox'>
