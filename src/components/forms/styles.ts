@@ -15,6 +15,7 @@ export default makeStyles(() => ({
   },
   error: {
     color: `${Nord.aurora0}`,
+    margin: '6px',
     fontSize: '18px',
     fontWeight: 'bold'
   },

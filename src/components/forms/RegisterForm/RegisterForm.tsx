@@ -1,14 +1,15 @@
 import React, { FormEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
+import useStyles from '../styles';
 import * as Yup from 'yup';
+import * as Nord from '../../../utils/nordPalette'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import * as Nord from '../../../utils/nordPalette'
-import useStyles from '../styles';
+import { Checkbox, FormControlLabel, withStyles, Box } from '@material-ui/core';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
-import { Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,9 +34,6 @@ const CustomCheckbox = withStyles({
       color: `${Nord.aurora3}`,
     },
   },
-  label: {
-    fontFamily: 'Arcon'
-  },
   checked: {},
 })((props: any) => <Checkbox color='default' {...props} />);
 
@@ -49,7 +47,6 @@ interface Props {
   values: { [field: string]: any };
   errors: { [field: string]: any };
   checked: boolean
-  label: string
 }
 
 export default function RegisterForm() {
@@ -129,10 +126,16 @@ export default function RegisterForm() {
               <FormControlLabel
                 control={
                   <CustomCheckbox
-                  checked={checkedCheckbox}
-                  onClick={toggleCheckbox} />
+                    checked={checkedCheckbox}
+                    onClick={toggleCheckbox}
+                  />
                 }
-                label='You must agree with the website policies'
+                label={
+                  <Box
+                    component='div'
+                    fontFamily='Arcon'
+                    fontSize='18px'
+                  > You must agree with the website policy </Box>}
               /><br/>
               (Please read our &nbsp;
               <Link className={classes.textLink} to={TERMS_AND_CONDITIONS_PATH}>
