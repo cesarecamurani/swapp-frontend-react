@@ -1,12 +1,12 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import NavbarButton from '../NavbarButton/NavbarButton';
+import DefaultButton from '../DefaultButton/DefaultButton';
 
 function SearchBar() {
   return (
     <Form>
       <div className="SearchBar" placeholder='Search'></div>
-      <NavbarButton> Search </NavbarButton>
+      <DefaultButton> Search </DefaultButton>
     </Form>
   );
 }

@@ -9,6 +9,10 @@ export default makeStyles(() => ({
   p: {
     fontSize: '18px'
   },
+  eyeIcon: {
+    fontSize: '25px',
+    cursor: 'pointer'
+  },
   error: {
     color: `${Nord.aurora0}`,
     fontSize: '18px',
@@ -25,9 +29,6 @@ export default makeStyles(() => ({
       color: `${Nord.frost2}`,
       textDecoration: 'underline'
     }
-  },
-  inputContainer: {
-    width: '100%'
   },
   form: {
     position: 'inherit',

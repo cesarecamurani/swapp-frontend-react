@@ -1,13 +1,14 @@
 import React, { FormEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import * as Nord from '../../../utils/nordPalette'
 import useStyles from '../styles';
-import NavbarButton from '../../NavbarButton/NavbarButton';
+import DefaultButton from '../../DefaultButton/DefaultButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
+import { Checkbox, FormControlLabel, withStyles } from '@material-ui/core';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,31 +26,63 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), ''], 'Passwords must match!')
 })
 
+const CustomCheckbox = withStyles({
+  root: {
+    color: `${Nord.snowStorm0}`,
+    '&$checked': {
+      color: `${Nord.aurora3}`,
+    },
+  },
+  label: {
+    fontFamily: 'Arcon'
+  },
+  checked: {},
+})((props: any) => <Checkbox color='default' {...props} />);
+
 interface Props {
   handleSubmit: FormEventHandler;
   handleChange: FormEventHandler;
   setFieldTouched: (field: string, value: any, shouldValidate?: boolean) => void;
+  isValid: boolean
+  dirty: boolean
   touched: { [field: string]: boolean }
   values: { [field: string]: any };
   errors: { [field: string]: any };
+  checked: boolean
+  label: string
 }
 
 export default function RegisterForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
+  const [checkedCheckbox, setCheckedCheckbox] = useState(false)
 
   function togglePasswordVisibility() {
     setVisiblePassword(!visiblePassword)
   }
 
+  function toggleCheckbox() {
+    setCheckedCheckbox(!checkedCheckbox)
+  }
+
+  function sayHello() {
+    alert('You clicked me!');
+  }
+
   return (
     <div className={classes.page}>
       <Formik
-        initialValues={{ email: '', password: '', confirm_password: '' }}
+        initialValues={{
+          email: '',
+          password: '',
+          confirm_password: '' ,
+          isValid: false,
+          dirty: false
+        }}
         validationSchema={validationSchema}
         onSubmit={values => { console.log(values) }}
       >
-        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors }: Props) => (
+        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
           <form className={classes.form}  onSubmit={handleSubmit}>
             <div className={classes.welcomeMessage}> Welcome! </div>
             <p className={classes.p}>
@@ -72,39 +105,46 @@ export default function RegisterForm() {
               onBlur={() => setFieldTouched('password', true)}
               value={values.password}
               name='password'
-              placeholder='Password (min 8 chars - 1 num - 1 caps)'
+              placeholder='Password (min 8 chars with 1 digit & 1 caps)'
             />
             { errors.password && touched.password ? <p className={classes.error}>{errors.password}</p> : ''}
-            <div className={classes.inputContainer}>
-              <input
-                className={classes.formInput}
-                type={ visiblePassword ? 'text' : 'password' }
-                onChange={handleChange}
-                onBlur={() => setFieldTouched('confirm_password', true)}
-                value={values.confirm_password}
-                name='confirm_password'
-                placeholder='Please confirm Password'
-              />
-              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px', cursor: 'pointer' }}>
-                {
-                  visiblePassword ?
-                  <FontAwesomeIcon icon={faEye} /> :
-                  <FontAwesomeIcon icon={faEyeSlash} />
-                }
-              </i>
-            </div>
+            <input
+              className={classes.formInput}
+              type={ visiblePassword ? 'text' : 'password' }
+              onChange={handleChange}
+              onBlur={() => setFieldTouched('confirm_password', true)}
+              value={values.confirm_password}
+              name='confirm_password'
+              placeholder='Please confirm Password'
+            />
             { errors.confirm_password && touched.confirm_password ? <p className={classes.error}>{errors.confirm_password}</p> : ''}
+            <i onClick={togglePasswordVisibility} className={classes.eyeIcon}>
+              {
+                visiblePassword ?
+                <FontAwesomeIcon icon={faEye} /> :
+                <FontAwesomeIcon icon={faEyeSlash} />
+              }
+            </i>
             <p className={classes.p}>
-              <Form.Group controlId='formBasicCheckbox'>
-                <Form.Check type='checkbox' label='You must agree with the website policy' />
-              </Form.Group>
-                (Please read our &nbsp;
+              <FormControlLabel
+                control={
+                  <CustomCheckbox
+                  checked={checkedCheckbox}
+                  onClick={toggleCheckbox} />
+                }
+                label='You must agree with the website policies'
+              /><br/>
+              (Please read our &nbsp;
               <Link className={classes.textLink} to={TERMS_AND_CONDITIONS_PATH}>
                 Terms and Conditions
               </Link>
-                )
+              )
             </p>
-            <NavbarButton> Register </NavbarButton>
+            <DefaultButton
+              type='submit'
+              disabled={!(isValid && dirty && checkedCheckbox)}
+              onClick={sayHello}
+            > Register </DefaultButton>
             <p className={classes.p}>
               Already registered? &nbsp;
               <Link className={classes.textLink} to={LOGIN_PATH}>

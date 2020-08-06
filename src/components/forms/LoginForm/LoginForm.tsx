@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
-import NavbarButton from '../../NavbarButton/NavbarButton';
+import DefaultButton from '../../DefaultButton/DefaultButton';
 import { REGISTER_PATH } from '../../../utils/paths';
 
 const validationSchema = Yup.object().shape({
@@ -69,26 +69,27 @@ export default function LoginForm() {
               placeholder='Email address'
             />
             { errors.email && touched.email ? <p className={classes.error}>{errors.email}</p> : ''}
-            <div className={classes.inputContainer}>
-              <input
-                className={classes.formInput}
-                type={ visiblePassword ? 'text' : 'password' }
-                onChange={handleChange}
-                onBlur={() => setFieldTouched('password', true)}
-                value={values.password}
-                name='password'
-                placeholder='Password'
-              />
-              <i onClick={togglePasswordVisibility} style={{ fontSize: '30px', cursor: 'pointer' }}>
-                {
-                  visiblePassword ?
-                  <FontAwesomeIcon icon={faEye} /> :
-                  <FontAwesomeIcon icon={faEyeSlash} />
-                }
-              </i>
-            </div>
+            <input
+              className={classes.formInput}
+              type={ visiblePassword ? 'text' : 'password' }
+              onChange={handleChange}
+              onBlur={() => setFieldTouched('password', true)}
+              value={values.password}
+              name='password'
+              placeholder='Password'
+            />
             { errors.password && touched.password ? <p className={classes.error}>{errors.password}</p> : ''}
-            <NavbarButton type='submit' disabled={!(isValid && dirty)}> Login </NavbarButton>
+            <i onClick={togglePasswordVisibility} className={classes.eyeIcon}>
+              {
+                visiblePassword ?
+                <FontAwesomeIcon icon={faEye} /> :
+                <FontAwesomeIcon icon={faEyeSlash} />
+              }
+            </i>
+            <DefaultButton
+              type='submit'
+              disabled={!(isValid && dirty)}
+            > Login </DefaultButton>
             <p className={classes.p}>
               Not registered yet? &nbsp;
               <Link className={classes.textLink} to={REGISTER_PATH}>

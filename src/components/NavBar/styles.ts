@@ -19,8 +19,17 @@ export default makeStyles(() => ({
   title: {
     cursor: 'pointer'
   },
-  textLink: {
+  homeLink: {
     color: 'inherit',
     textDecoration: 'inherit',
+  },
+  textLink: {
+    fontSize: '23px',
+    padding: '5px',
+    color: `${Nord.snowStorm0}`,
+    textDecoration: 'inherit',
+    '&:hover': {
+      color: `${Nord.frost2}`
+    }
   }
 }))
