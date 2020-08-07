@@ -3,7 +3,7 @@ import * as Nord from '../../utils/nordPalette'
 
 export default makeStyles(() => ({
   page: {
-    padding: '0 0 0 0',
+    paddingLeft: '30px',
     margin: '130px'
   },
   p: {
@@ -33,8 +33,6 @@ export default makeStyles(() => ({
   },
   form: {
     position: 'inherit',
-    alignContent:' center',
-    zIndex: 1,
     background: `${Nord.polarNight3}`,
     maxWidth: '410px',
     width: '410px',

@@ -1,14 +1,17 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
-import DefaultButton from '../DefaultButton/DefaultButton';
+import useStyles from './styles';
+import { Form, FormControl } from 'react-bootstrap';
 
-function SearchBar() {
+export default function SearchBar() {
+  const classes = useStyles()
+
   return (
     <Form>
-      <div className="SearchBar" placeholder='Search'></div>
-      <DefaultButton> Search </DefaultButton>
+      <FormControl
+        className={classes.searchBar}
+        type='text'
+        placeholder='Search'
+      />
     </Form>
   );
 }
-
-export default SearchBar;
