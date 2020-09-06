@@ -2,29 +2,14 @@ import React, { FormEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import useStyles from '../styles';
-import * as Yup from 'yup';
 import * as Nord from '../../../utils/nordPalette'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { Checkbox, FormControlLabel, withStyles, Box } from '@material-ui/core';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Must be a valid email!')
-    .required('Email is required!'),
-  password: Yup.string()
-    .required('Password is required!')
-    .min(8, 'Password is too short - 8 characters minimum!')
-    .matches(
-      /(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]*/,
-      'Password must contain at least a number and a capital letter!'
-    ),
-  confirm_password: Yup.string()
-    .required('Please confirm your Password!')
-    .oneOf([Yup.ref('password'), ''], 'Passwords must match!')
-})
+import { registerUser } from '../../../store/user/userActions'
+import { registerValidationSchema } from '../../../utils/validations'
 
 const CustomCheckbox = withStyles({
   root: {
@@ -52,7 +37,7 @@ export default function RegisterForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [checkedCheckbox, setCheckedCheckbox] = useState(false)
-
+  
   function togglePasswordVisibility() {
     setVisiblePassword(!visiblePassword)
   }
@@ -61,21 +46,18 @@ export default function RegisterForm() {
     setCheckedCheckbox(!checkedCheckbox)
   }
 
-  function sayHello() {
-    alert('You clicked me!');
-  }
-
   return (
     <div className={classes.page}>
       <Formik
         initialValues={{
+          username: '',
           email: '',
           password: '',
           confirm_password: '' ,
           isValid: false,
           dirty: false
         }}
-        validationSchema={validationSchema}
+        validationSchema={registerValidationSchema}
         onSubmit={values => { console.log(values) }}
       >
         {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
@@ -84,6 +66,16 @@ export default function RegisterForm() {
             <p className={classes.p}>
               Please Register below and start SWApping around!
             </p>
+            <input
+              className={classes.formInput}
+              type='text'
+              onChange={handleChange}
+              onBlur={() => setFieldTouched('username', true)}
+              value={values.username}
+              name='username'
+              placeholder='Username'
+            />
+            { errors.username && touched.username ? <p className={classes.error}>{errors.username}</p> : ''}
             <input
               className={classes.formInput}
               type='text'
@@ -145,7 +137,7 @@ export default function RegisterForm() {
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty && checkedCheckbox)}
-              onClick={sayHello}
+              onClick={() => registerUser(values)}
             > Register </DefaultButton>
             <p className={classes.p}>
               Already registered? &nbsp;

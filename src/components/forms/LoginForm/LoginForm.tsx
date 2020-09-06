@@ -1,25 +1,13 @@
 import React, { FormEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { REGISTER_PATH } from '../../../utils/paths';
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Must be a valid email!')
-    .required('Email is required!'),
-  password: Yup.string()
-    .required('Password is required!')
-    .min(8, 'Password is too short - 8 characters minimum!')
-    .matches(
-      /(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]*/,
-      'Password must contain at least a number and a capital letter!'
-    )
-})
+import { loginUser } from '../../../store/user/userActions'
+import { loginValidationSchema } from '../../../utils/validations'
 
 interface Props {
   handleSubmit: FormEventHandler
@@ -50,7 +38,7 @@ export default function LoginForm() {
           dirty: true,
           isValid: false
         }}
-        validationSchema={validationSchema}
+        validationSchema={loginValidationSchema}
         onSubmit={values => { console.log(values) }}
       >
         {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
@@ -89,6 +77,7 @@ export default function LoginForm() {
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
+              onClick={() => loginUser(values)}
             > Login </DefaultButton>
             <p className={classes.p}>
               Not registered yet? &nbsp;

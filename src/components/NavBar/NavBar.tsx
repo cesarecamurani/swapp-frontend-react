@@ -4,7 +4,7 @@ import { GiWingfoot } from 'react-icons/gi';
 import NavbarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
 import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../utils/paths';
-import Searchbar from '../Searchbar/Searchbar';
+// import Searchbar from '../Searchbar/Searchbar';
 
 export default function Navbar() {
   const classes = useStyles();
@@ -17,7 +17,7 @@ export default function Navbar() {
           { fontSize: '14px', margin: 'inherit' }
         }> All you need is Swapp! </p>
       </Link>
-      <Searchbar />
+      {/* <Searchbar /> */}
       <NavbarButtons>
         <Link className={classes.textLink} to={LOGIN_PATH}>
           Login
