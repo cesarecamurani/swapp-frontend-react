@@ -6,7 +6,7 @@ import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { REGISTER_PATH } from '../../../utils/paths';
-import { loginUser } from '../../../store/user/userActions'
+import AuthService from '../../../services/auth.service'
 import { loginValidationSchema } from '../../../utils/validations'
 
 interface Props {
@@ -77,7 +77,7 @@ export default function LoginForm() {
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
-              onClick={() => loginUser(values)}
+              onClick={() => AuthService.login(values)}
             > Login </DefaultButton>
             <p className={classes.p}>
               Not registered yet? &nbsp;

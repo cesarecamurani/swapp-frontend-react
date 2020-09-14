@@ -8,7 +8,7 @@ import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { Checkbox, FormControlLabel, withStyles, Box } from '@material-ui/core';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
-import { registerUser } from '../../../store/user/userActions'
+import AuthService from '../../../services/auth.service'
 import { registerValidationSchema } from '../../../utils/validations'
 
 const CustomCheckbox = withStyles({
@@ -37,7 +37,7 @@ export default function RegisterForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [checkedCheckbox, setCheckedCheckbox] = useState(false)
-  
+
   function togglePasswordVisibility() {
     setVisiblePassword(!visiblePassword)
   }
@@ -58,7 +58,10 @@ export default function RegisterForm() {
           dirty: false
         }}
         validationSchema={registerValidationSchema}
-        onSubmit={values => { console.log(values) }}
+        onSubmit={values => {
+          AuthService.register(values)
+          console.log(values)
+        }}
       >
         {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
           <form className={classes.form}  onSubmit={handleSubmit}>
@@ -137,7 +140,6 @@ export default function RegisterForm() {
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty && checkedCheckbox)}
-              onClick={() => registerUser(values)}
             > Register </DefaultButton>
             <p className={classes.p}>
               Already registered? &nbsp;
