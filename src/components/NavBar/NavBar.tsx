@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useStyles from './styles';
 import { GiWingfoot } from 'react-icons/gi';
 import NavbarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
 import { HOME_PATH, LOGIN_PATH, REGISTER_PATH } from '../../utils/paths';
-import AuthService from '../../services/auth.service'
+// import AuthService from '../../services/auth.service'
 // import Searchbar from '../Searchbar/Searchbar';
 
 export default function Navbar() {

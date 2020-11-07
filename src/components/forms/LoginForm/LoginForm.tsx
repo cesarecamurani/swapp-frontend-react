@@ -1,24 +1,14 @@
-import React, { FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
+import FormProps from '../formProps'
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { REGISTER_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
 import { loginValidationSchema } from '../../../utils/validations'
-
-interface Props {
-  handleSubmit: FormEventHandler
-  handleChange: FormEventHandler
-  setFieldTouched: (field: string, value: any, shouldValidate?: boolean) => void
-  isValid: boolean
-  dirty: boolean
-  touched: { [field: string]: boolean }
-  values: { [field: string]: any }
-  errors: { [field: string]: any }
-}
 
 export default function LoginForm() {
   const classes = useStyles();
@@ -41,7 +31,7 @@ export default function LoginForm() {
         validationSchema={loginValidationSchema}
         onSubmit={values => { console.log(values) }}
       >
-        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
+        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: FormProps) => (
           <form className={classes.form} onSubmit={handleSubmit}>
             <div className={classes.welcomeMessage}> Welcome!</div>
             <p className={classes.p}>

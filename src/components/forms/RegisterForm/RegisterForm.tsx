@@ -1,7 +1,8 @@
-import React, { FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import useStyles from '../styles';
+import FormProps from '../formProps'
 import * as Nord from '../../../utils/nordPalette'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
@@ -19,19 +20,7 @@ const CustomCheckbox = withStyles({
     },
   },
   checked: {},
-})((props: any) => <Checkbox color='default' {...props} />);
-
-interface Props {
-  handleSubmit: FormEventHandler;
-  handleChange: FormEventHandler;
-  setFieldTouched: (field: string, value: any, shouldValidate?: boolean) => void;
-  isValid: boolean
-  dirty: boolean
-  touched: { [field: string]: boolean }
-  values: { [field: string]: any };
-  errors: { [field: string]: any };
-  checked: boolean
-}
+})((FormProps: any) => <Checkbox color='default' {...FormProps} />);
 
 export default function RegisterForm() {
   const classes = useStyles();
@@ -53,7 +42,7 @@ export default function RegisterForm() {
           username: '',
           email: '',
           password: '',
-          confirm_password: '' ,
+          confirmPassword: '' ,
           isValid: false,
           dirty: false
         }}
@@ -63,8 +52,8 @@ export default function RegisterForm() {
           console.log(values)
         }}
       >
-        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: Props) => (
-          <form className={classes.form}  onSubmit={handleSubmit}>
+        {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: FormProps) => (
+          <form className={classes.form} onSubmit={handleSubmit}>
             <div className={classes.welcomeMessage}> Welcome! </div>
             <p className={classes.p}>
               Please Register below and start SWApping around!
@@ -103,12 +92,12 @@ export default function RegisterForm() {
               className={classes.formInput}
               type={ visiblePassword ? 'text' : 'password' }
               onChange={handleChange}
-              onBlur={() => setFieldTouched('confirm_password', true)}
-              value={values.confirm_password}
-              name='confirm_password'
+              onBlur={() => setFieldTouched('confirmPassword', true)}
+              value={values.confirmPassword}
+              name='confirmPassword'
               placeholder='Please confirm Password'
             />
-            { errors.confirm_password && touched.confirm_password ? <p className={classes.error}>{errors.confirm_password}</p> : ''}
+            { errors.confirmPassword && touched.confirmPassword ? <p className={classes.error}>{errors.confirmPassword}</p> : ''}
             <i onClick={togglePasswordVisibility} className={classes.eyeIcon}>
               {
                 visiblePassword ?

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import 'yup-phone';
 
 export const loginValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,7 +27,23 @@ export const registerValidationSchema = Yup.object().shape({
       /(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]*/,
       'Password must contain at least a number and a capital letter!'
     ),
-  confirm_password: Yup.string()
+  confirmPassword: Yup.string()
     .required('Please confirm your Password!')
     .oneOf([Yup.ref('password'), ''], 'Passwords must match!')
+})
+
+export const swapperValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('First Name is required!'),
+  surname: Yup.string()
+    .required('Last Name is required!'),
+  dateOfBirth: Yup.string()
+    .required('Date of birth is required!'),
+  city: Yup.string()
+    .required('City id required!'),
+  country: Yup.string()
+    .required('Country id required!'),
+  phoneNumber: Yup.string()
+    .required('Phone number is required!')
+    .phone('GB', true, 'Must be a valid UK mobile number!')
 })
