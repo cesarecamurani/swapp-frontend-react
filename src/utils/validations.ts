@@ -40,10 +40,12 @@ export const swapperValidationSchema = Yup.object().shape({
   dateOfBirth: Yup.string()
     .required('Date of birth is required!'),
   city: Yup.string()
-    .required('City id required!'),
+    .required('City is required!'),
   country: Yup.string()
-    .required('Country id required!'),
+    .required('Country is required!'),
+  address: Yup.string()
+    .required('Address is required!'),
   phoneNumber: Yup.string()
-    .required('Phone number is required!')
-    .phone('GB', true, 'Must be a valid UK mobile number!')
+    .required('Phone Number is required!')
+    .phone('GB', true, 'Must be a valid phone number!')
 })

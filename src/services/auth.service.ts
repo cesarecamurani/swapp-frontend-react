@@ -1,11 +1,7 @@
 import Axios from '../utils/axios';
 import { History } from '../utils/history'
-import { HOME_PATH, PROFILE_PATH, SWAPPER_PATH } from '../utils/paths';
-
-const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+import { HOME_PATH, LOGIN_PATH } from '../utils/paths';
+import { headers } from './headers'
 
 function register(userParams: any) {
   Axios
@@ -17,7 +13,7 @@ function register(userParams: any) {
       },
       headers: headers
     })
-    .then(() => { History.push(SWAPPER_PATH) })
+    .then(() => { History.push(LOGIN_PATH) })
     .catch(error => console.log(error));
 }
 
@@ -29,9 +25,13 @@ function login(userParams: any) {
       headers: headers
     })
     .then(response => {
-      localStorage.setItem('user', response.data);
-      console.log(response.data.auth_token)
-      History.push(PROFILE_PATH);
+      if (response.data.auth_token) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
+      
+      console.log(response.data)
+      
+      History.push(HOME_PATH);
     })
     .catch(error => console.log(error));
 }
@@ -41,6 +41,7 @@ function logout() {
     .post('/auth/logout', { headers: headers })
     .then(() => {
       localStorage.removeItem('user');
+      
       History.push(HOME_PATH);
     })
     .catch(error => console.log(error));

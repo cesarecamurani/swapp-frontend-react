@@ -1,8 +1,11 @@
 import React from 'react';
-import AuthService from '../../../services/auth.service'
+// import AuthService from '../../../services/auth.service'
 import { Formik } from 'formik';
-// import Moment from 'react-moment';
-// import 'moment-timezone';
+// import { format } from 'date-fns'
+import Axios from '../../../utils/axios';
+import { History } from '../../../utils/history'
+import { headers } from '../../../services/headers'
+import { HOME_PATH } from '../../../utils/paths';
 import useStyles from '../styles';
 import FormProps from '../formProps'
 import DefaultButton from '../../DefaultButton/DefaultButton';
@@ -10,6 +13,27 @@ import { swapperValidationSchema } from '../../../utils/validations'
 
 export default function SwapperForm() {
   const classes = useStyles();
+
+  function createSwapper(params: any) {
+    Axios
+      .post('/swappers', {
+        swapper: {
+          name: params.name,
+          surname: params.username,
+          phone_number: params.phoneNumber,
+          address: params.address,
+          city: params.city,
+          country: params.country,
+          date_of_birth: params.dateOfBirth,
+          email: '',
+          username: '',
+          user_id: ''
+        },
+        headers: headers
+      })
+      .then(() => { History.push(HOME_PATH) })
+      .catch(error => console.log(error));
+  }
  
   return (
     <div className={classes.page}>
@@ -17,9 +41,12 @@ export default function SwapperForm() {
         initialValues={{
           name: '',
           surname: '',
+          // username: '',
+          // email: '',
           dateOfBirth: '',
           city: '',
           country: '',
+          address: '',
           phoneNumber: '',
           dirty: true,
           isValid: false
@@ -86,16 +113,26 @@ export default function SwapperForm() {
               className={classes.formInput}
               type='text'
               onChange={handleChange}
+              onBlur={() => setFieldTouched('address', true)}
+              value={values.address}
+              name='address'
+              placeholder='Full Address (including postcode)'
+            />
+            { errors.address && touched.address ? <p className={classes.error}>{errors.address}</p> : ''}
+            <input
+              className={classes.formInput}
+              type='text'
+              onChange={handleChange}
               onBlur={() => setFieldTouched('phoneNumber', true)}
               value={values.phoneNumber}
               name='phoneNumber'
-              placeholder='Phone Number'
+              placeholder='Mobile Number'
             />
             { errors.phoneNumber && touched.phoneNumber ? <p className={classes.error}>{errors.phoneNumber}</p> : ''}
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
-              onClick={() => AuthService.login(values)}
+              onClick={() => createSwapper(values)}
             > Complete your Profile! </DefaultButton>
           </form>
         )}
