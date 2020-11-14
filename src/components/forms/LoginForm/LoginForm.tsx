@@ -6,16 +6,35 @@ import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
 import FormProps from '../formProps'
 import DefaultButton from '../../DefaultButton/DefaultButton';
-import { REGISTER_PATH } from '../../../utils/paths';
+import { HOME_PATH, REGISTER_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
+import { History } from '../../../utils/history'
 import { loginValidationSchema } from '../../../utils/validations'
 
 export default function LoginForm() {
   const classes = useStyles();
   const [visiblePassword, setVisiblePassword] = useState(false)
+  const [message, setMessage] = useState('');
 
   const togglePasswordVisibility = () => {
     setVisiblePassword(!visiblePassword)
+  }
+
+  const loginHandler = (username: string, password: string) => {
+    AuthService
+      .login(username, password)
+      .then(() => {
+        History.push(HOME_PATH)
+      },
+      (error: any) => {
+        const resMessage =
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setMessage(resMessage);
+      }
+    );
   }
 
   return (
@@ -29,7 +48,10 @@ export default function LoginForm() {
           isValid: false
         }}
         validationSchema={loginValidationSchema}
-        onSubmit={values => { console.log(values) }}
+        onSubmit={values => {
+          loginHandler(values.email, values.password)
+          console.log(values) 
+        }}
       >
         {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: FormProps) => (
           <form className={classes.form} onSubmit={handleSubmit}>
@@ -64,10 +86,10 @@ export default function LoginForm() {
                 <FontAwesomeIcon icon={faEyeSlash} />
               }
             </i>
+            {message && (<div className={classes.error}> {message} </div>)}
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
-              onClick={() => AuthService.login(values)}
             > Login </DefaultButton>
             <p className={classes.p}>
               Not registered yet? &nbsp;

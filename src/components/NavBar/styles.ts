@@ -23,6 +23,10 @@ export default makeStyles(() => ({
     color: 'inherit',
     textDecoration: 'inherit',
   },
+  motto: {
+    fontSize: '14px', 
+    margin: 'inherit'
+  },
   textLink: {
     fontSize: '23px',
     padding: '5px',

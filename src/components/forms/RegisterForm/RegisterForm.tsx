@@ -10,6 +10,7 @@ import { Checkbox, FormControlLabel, withStyles, Box } from '@material-ui/core';
 import DefaultButton from '../../DefaultButton/DefaultButton';
 import { LOGIN_PATH, TERMS_AND_CONDITIONS_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
+import { History } from '../../../utils/history'
 import { registerValidationSchema } from '../../../utils/validations'
 
 const CustomCheckbox = withStyles({
@@ -24,6 +25,7 @@ const CustomCheckbox = withStyles({
 
 export default function RegisterForm() {
   const classes = useStyles();
+  const [message, setMessage] = useState('');
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [checkedCheckbox, setCheckedCheckbox] = useState(false)
 
@@ -33,6 +35,23 @@ export default function RegisterForm() {
 
   function toggleCheckbox() {
     setCheckedCheckbox(!checkedCheckbox)
+  }
+
+  const registerHandler = (username: string, email: string, password: string) => {
+    AuthService
+      .register(username, email, password)
+      .then(() => {
+        History.push(LOGIN_PATH)
+      },
+      (error: any) => {
+        const resMessage =
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setMessage(resMessage);
+      }
+    );
   }
 
   return (
@@ -48,7 +67,7 @@ export default function RegisterForm() {
         }}
         validationSchema={registerValidationSchema}
         onSubmit={values => {
-          AuthService.register(values)
+          registerHandler(values.username, values.email, values.password)
           console.log(values)
         }}
       >
@@ -105,6 +124,7 @@ export default function RegisterForm() {
                 <FontAwesomeIcon icon={faEyeSlash} />
               }
             </i>
+            {message && (<div className={classes.error}> {message} </div>)}
             <p className={classes.p}>
               <FormControlLabel
                 control={

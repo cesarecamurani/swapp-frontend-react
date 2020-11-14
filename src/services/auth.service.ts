@@ -1,50 +1,52 @@
 import Axios from '../utils/axios';
 import { History } from '../utils/history'
-import { HOME_PATH, LOGIN_PATH } from '../utils/paths';
+import { HOME_PATH } from '../utils/paths';
 import { headers } from './headers'
 
-function register(userParams: any) {
-  Axios
-    .post('/users', {
-      user: {
-        username: userParams.username,
-        email: userParams.email,
-        password: userParams.password
-      },
-      headers: headers
-    })
-    .then(() => { History.push(LOGIN_PATH) })
-    .catch(error => console.log(error));
+async function register(username: string, email: string, password: string) {
+  try {
+    await Axios
+      .post('/users', {
+        user: {
+          username: username,
+          email: email,
+          password: password
+        },
+        headers: headers
+      });
+    } catch (error) {
+    return console.log(error);
+  }
 }
 
-function login(userParams: any) {
-  Axios
+async function login(email: string, password: string) {
+  const response = await Axios
     .post('/auth/login', {
-      email: userParams.email,
-      password: userParams.password,
+      email: email,
+      password: password,
       headers: headers
-    })
-    .then(response => {
-      if (response.data.auth_token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-      
-      console.log(response.data)
-      
-      History.push(HOME_PATH);
-    })
-    .catch(error => console.log(error));
+    });
+  
+  if (response.data.auth_token) {
+    localStorage.setItem('user', JSON.stringify(response.data));
+  }
+  
+  console.log(response.data);
+  
+  return response.data;
 }
 
-function logout() {
-  Axios
-    .post('/auth/logout', { headers: headers })
-    .then(() => {
-      localStorage.removeItem('user');
-      
-      History.push(HOME_PATH);
-    })
-    .catch(error => console.log(error));
+async function logout() {
+  try {
+    await Axios.post('/auth/logout', { headers: headers });
+
+    localStorage.removeItem('user');
+
+    History.push(HOME_PATH);
+  
+  } catch (error) {
+    return console.log(error);
+  }
 }
 
 function getCurrentUser() {
