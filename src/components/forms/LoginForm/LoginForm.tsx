@@ -6,7 +6,7 @@ import {faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import useStyles from '../styles';
 import FormProps from '../formProps'
 import DefaultButton from '../../DefaultButton/DefaultButton';
-import { HOME_PATH, REGISTER_PATH } from '../../../utils/paths';
+import { HOME_PATH, PROFILE_PATH, REGISTER_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
 import { History } from '../../../utils/history'
 import { loginValidationSchema } from '../../../utils/validations'
@@ -24,7 +24,7 @@ export default function LoginForm() {
     AuthService
       .login(username, password)
       .then(() => {
-        History.push(HOME_PATH)
+        History.push(PROFILE_PATH)
       },
       (error: any) => {
         const resMessage =

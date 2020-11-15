@@ -10,6 +10,12 @@ export default makeStyles(() => ({
     fontSize: '50px',
     color: `${Nord.aurora3}`,
   },
+  error: {
+    color: `${Nord.aurora0}`,
+    margin: '6px',
+    fontSize: '18px',
+    fontWeight: 'bold'
+  },
   box: {
     position: 'inherit',
     background: `${Nord.polarNight3}`,

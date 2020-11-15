@@ -5,6 +5,7 @@ import NavbarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
 import { HOME_PATH, LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '../../utils/paths';
 import AuthService from '../../services/auth.service'
+import { History } from '../../utils/history'
 
 export default function Navbar() {
   const classes = useStyles();
@@ -16,8 +17,8 @@ export default function Navbar() {
     if (user) { setCurrentUser(user) }
   }, []);
 
-  function logout() {
-    AuthService.logout();
+  const logoutHandler = () => {
+    AuthService.logout().then(() => { History.push(LOGIN_PATH) });
   }
 
   return (
@@ -31,7 +32,7 @@ export default function Navbar() {
           <Link className={classes.textLink} to={PROFILE_PATH}>
             {currentUser.username}
           </Link>
-          <Link className={classes.textLink} to={LOGIN_PATH} onClick={logout} >
+          <Link className={classes.textLink} to={LOGIN_PATH} onClick={logoutHandler} >
             Logout
           </Link>
         </NavbarButtons>

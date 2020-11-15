@@ -1,6 +1,4 @@
 import Axios from '../utils/axios';
-import { History } from '../utils/history'
-import { HOME_PATH } from '../utils/paths';
 import { headers } from './headers'
 
 async function register(username: string, email: string, password: string) {
@@ -39,11 +37,11 @@ async function login(email: string, password: string) {
 async function logout() {
   try {
     await Axios.post('/auth/logout', { headers: headers });
-
+    
+    console.log(headers)
+    
     localStorage.removeItem('user');
 
-    History.push(HOME_PATH);
-  
   } catch (error) {
     return console.log(error);
   }
