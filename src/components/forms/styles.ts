@@ -52,7 +52,7 @@ export default makeStyles(() => ({
     boxSizing: 'border-box',
     fontSize: '18px',
     '&:hover': {
-      background: `${Nord.aurora3}`
+      background: `${Nord.frost2}`
     }
   }
 }))

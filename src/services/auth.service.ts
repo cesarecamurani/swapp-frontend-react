@@ -1,5 +1,5 @@
 import Axios from '../utils/axios';
-import { headers } from './headers'
+import { headers } from './headers';
 
 async function register(username: string, email: string, password: string) {
   try {
@@ -36,9 +36,11 @@ async function login(email: string, password: string) {
 
 async function logout() {
   try {
-    await Axios.post('/auth/logout', { headers: headers });
+    const response = await Axios.post('/auth/logout', { headers: headers });
     
     console.log(headers)
+
+    console.log(response.data.message)
     
     localStorage.removeItem('user');
 
