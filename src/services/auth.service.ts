@@ -1,5 +1,5 @@
 import Axios from '../utils/axios';
-import { headers } from './headers'
+import { headers } from './headers';
 
 async function register(username: string, email: string, password: string) {
   try {
@@ -24,22 +24,24 @@ async function login(email: string, password: string) {
       password: password,
       headers: headers
     });
-  
+
   if (response.data.auth_token) {
     localStorage.setItem('user', JSON.stringify(response.data));
   }
-  
+
   console.log(response.data);
-  
+
   return response.data;
 }
 
 async function logout() {
   try {
-    await Axios.post('/auth/logout', { headers: headers });
-    
+    const response = await Axios.post('/auth/logout', { headers: headers });
+
     console.log(headers)
-    
+
+    console.log(response.data.message)
+
     localStorage.removeItem('user');
 
   } catch (error) {

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useStyles from './styles';
 import { GiWingfoot } from 'react-icons/gi';
 import NavbarButtons from '../NavbarButtons/NavbarButtons';
@@ -9,13 +10,15 @@ import { History } from '../../utils/history'
 
 export default function Navbar() {
   const classes = useStyles();
-  const [currentUser, setCurrentUser] = useState<any>()
+  // const [currentUser, setCurrentUser] = useState<any>()
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
+  // useEffect(() => {
+  //   const user = AuthService.getCurrentUser();
 
-    if (user) { setCurrentUser(user) }
-  }, []);
+  //   if (user) { setCurrentUser(user) }
+  // }, []);
+
+  const currentUser = AuthService.getCurrentUser()
 
   const logoutHandler = () => {
     AuthService.logout().then(() => { History.push(LOGIN_PATH) });
@@ -30,7 +33,7 @@ export default function Navbar() {
       {currentUser ? (
         <NavbarButtons>
           <Link className={classes.textLink} to={PROFILE_PATH}>
-            {currentUser.username}
+            {currentUser.username} Profile
           </Link>
           <Link className={classes.textLink} to={LOGIN_PATH} onClick={logoutHandler} >
             Logout

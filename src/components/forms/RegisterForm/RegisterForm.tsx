@@ -40,9 +40,7 @@ export default function RegisterForm() {
   const registerHandler = (username: string, email: string, password: string) => {
     AuthService
       .register(username, email, password)
-      .then(() => {
-        History.push(LOGIN_PATH)
-      },
+      .then(() => { History.push(LOGIN_PATH)},
       (error: any) => {
         const resMessage =
           (error.response && error.response.data && error.response.data.message) ||
