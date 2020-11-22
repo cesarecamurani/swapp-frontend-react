@@ -9,8 +9,8 @@ export default function Profile() {
   return (
     <div className={classes.page}>
       <div className={classes.box}>
-        <div className={classes.welcomeMessage}> 
-          {currentUser.username} Profile
+        <div className={classes.welcomeMessage}>
+           {currentUser.username} Profile Page
         </div>
       </div>
     </div>

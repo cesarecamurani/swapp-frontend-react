@@ -13,7 +13,7 @@ async function register(username: string, email: string, password: string) {
         headers: headers
       });
     } catch (error) {
-    return console.log(error);
+    return error
   }
 }
 
@@ -50,7 +50,9 @@ async function logout() {
 }
 
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem('user') || '{}');
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  return (user.auth_token && user.user_id) ? user : null
 }
 
 export default {

@@ -16,23 +16,22 @@ export default function LoginForm() {
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [message, setMessage] = useState('');
 
-  const togglePasswordVisibility = () => {
-    setVisiblePassword(!visiblePassword)
+  function togglePasswordVisibility() {
+    setVisiblePassword(!visiblePassword);
   }
 
-  const loginHandler = (username: string, password: string) => {
+  function loginHandler(username: string, password: string) {
     AuthService
       .login(username, password)
-      .then(() => { History.push(PROFILE_PATH) },
-      (error: any) => {
-        const resMessage =
-          (error.response && error.response.data && error.response.data.message) ||
-          error.message ||
-          error.toString();
+      .then(() => { History.push(PROFILE_PATH); },
+        (error: any) => {
+          const resMessage = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-        setMessage(resMessage);
-      }
-    );
+          setMessage(resMessage);
+        }
+      );
   }
 
   return (
@@ -48,7 +47,7 @@ export default function LoginForm() {
         validationSchema={loginValidationSchema}
         onSubmit={values => {
           loginHandler(values.email, values.password)
-          console.log(values) 
+          console.log(values)
         }}
       >
         {({ handleSubmit, handleChange, setFieldTouched, values, touched, errors, isValid, dirty }: FormProps) => (

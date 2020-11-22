@@ -1,5 +1,4 @@
-// import React, { useEffect, useState } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { GiWingfoot } from 'react-icons/gi';
 import NavbarButtons from '../NavbarButtons/NavbarButtons';
@@ -10,32 +9,30 @@ import { History } from '../../utils/history'
 
 export default function Navbar() {
   const classes = useStyles();
-  // const [currentUser, setCurrentUser] = useState<any>()
+  const [currentUser, setCurrentUser] = useState<any>()
 
-  // useEffect(() => {
-  //   const user = AuthService.getCurrentUser();
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
 
-  //   if (user) { setCurrentUser(user) }
-  // }, []);
+    if (user) { setCurrentUser(user) }
+  }, []);
 
-  const currentUser = AuthService.getCurrentUser()
-
-  const logoutHandler = () => {
-    AuthService.logout().then(() => { History.push(LOGIN_PATH) });
+  function logoutHandler() {
+    AuthService.logout().then(() => { History.push(LOGIN_PATH) })
   }
 
   return (
     <div className={classes.navbar}>
-      <Link className={classes.homeLink} to={HOME_PATH} >
+      <Link className={classes.homeLink} to={HOME_PATH}>
         <div className={classes.title}><GiWingfoot /> SWApp </div>
         <p className={classes.motto}> All you need is Swapp! </p>
       </Link>
       {currentUser ? (
         <NavbarButtons>
           <Link className={classes.textLink} to={PROFILE_PATH}>
-            {currentUser.username} Profile
+            {currentUser.username}
           </Link>
-          <Link className={classes.textLink} to={LOGIN_PATH} onClick={logoutHandler} >
+          <Link className={classes.textLink} to={LOGIN_PATH} onClick={logoutHandler}>
             Logout
           </Link>
         </NavbarButtons>

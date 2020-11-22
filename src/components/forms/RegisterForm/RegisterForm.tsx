@@ -37,19 +37,22 @@ export default function RegisterForm() {
     setCheckedCheckbox(!checkedCheckbox)
   }
 
-  const registerHandler = (username: string, email: string, password: string) => {
+  function registerHandler(username: string, email: string, password: string) {
     AuthService
       .register(username, email, password)
-      .then(() => { History.push(LOGIN_PATH)},
-      (error: any) => {
-        const resMessage =
-          (error.response && error.response.data && error.response.data.message) ||
-          error.message ||
-          error.toString();
+      .then(
+        (error: any) => {
+          if (error) {
+            const errorMessage = (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
 
-        setMessage(resMessage);
-      }
-    );
+            setMessage(errorMessage);
+          } else {
+            History.push(LOGIN_PATH);
+          }
+        }
+      );
   }
 
   return (

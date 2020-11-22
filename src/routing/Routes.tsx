@@ -14,6 +14,7 @@ import Swapper from '../components/forms/SwapperForm/SwapperForm';
 import LoginForm from '../components/forms/LoginForm/LoginForm';
 import RegisterForm from '../components/forms/RegisterForm/RegisterForm';
 import TermsAndConditions from '../components/forms/TermsAndConditions/TermsAndConditions';
+import { ProtectedRoute } from './ProtectedRoute';
 
 export default function Routes() {
   return (
@@ -21,7 +22,7 @@ export default function Routes() {
       <Route path={HOME_PATH} component={Homepage} />
       <Route path={LOGIN_PATH} component={LoginForm} />
       <Route path={REGISTER_PATH} component={RegisterForm}/>
-      <Route path={PROFILE_PATH} component={Profile} />
+      <ProtectedRoute path={PROFILE_PATH} component={Profile} />
       <Route path={SWAPPER_PATH} component={Swapper} />
       <Route path={TERMS_AND_CONDITIONS_PATH} component={TermsAndConditions}/>
     </Switch>
