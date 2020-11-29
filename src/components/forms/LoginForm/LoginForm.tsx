@@ -10,6 +10,7 @@ import { PROFILE_PATH, REGISTER_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
 import { History } from '../../../utils/history'
 import { loginValidationSchema } from '../../../utils/validations'
+// import UserService from '../../../services/user.service';
 
 export default function LoginForm() {
   const classes = useStyles();

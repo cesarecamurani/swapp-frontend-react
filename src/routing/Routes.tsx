@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import {
   HOME_PATH,
   LOGIN_PATH,
@@ -19,11 +19,12 @@ import { ProtectedRoute } from './ProtectedRoute';
 export default function Routes() {
   return (
     <Switch>
+      <Route exact path='/'><Redirect to={HOME_PATH} /></Route>
       <Route path={HOME_PATH} component={Homepage} />
       <Route path={LOGIN_PATH} component={LoginForm} />
       <Route path={REGISTER_PATH} component={RegisterForm}/>
       <ProtectedRoute path={PROFILE_PATH} component={Profile} />
-      <Route path={SWAPPER_PATH} component={Swapper} />
+      <ProtectedRoute path={SWAPPER_PATH} component={Swapper} />
       <Route path={TERMS_AND_CONDITIONS_PATH} component={TermsAndConditions}/>
     </Switch>
   )

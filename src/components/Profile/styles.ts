@@ -6,6 +6,9 @@ export default makeStyles(() => ({
     paddingLeft: '30px',
     margin: '130px'
   },
+  p: {
+    fontSize: '18px'
+  },
   welcomeMessage: {
     fontSize: '50px',
     color: `${Nord.aurora3}`,
@@ -15,6 +18,14 @@ export default makeStyles(() => ({
     margin: '6px',
     fontSize: '18px',
     fontWeight: 'bold'
+  },
+  textLink: {
+    color: `${Nord.aurora3}`,
+    textDecoration: 'inherit',
+    '&:hover': {
+      color: `${Nord.frost2}`,
+      textDecoration: 'underline'
+    }
   },
   box: {
     position: 'inherit',

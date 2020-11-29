@@ -1,11 +1,9 @@
-import React from 'react';
-// import AuthService from '../../../services/auth.service'
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 // import { format } from 'date-fns'
-import Axios from '../../../utils/axios';
 import { History } from '../../../utils/history'
-import { headers } from '../../../services/headers'
-import { HOME_PATH } from '../../../utils/paths';
+import UserService from '../../../services/user.service'
+import { PROFILE_PATH } from '../../../utils/paths';
 import useStyles from '../styles';
 import FormProps from '../formProps'
 import DefaultButton from '../../DefaultButton/DefaultButton';
@@ -13,36 +11,32 @@ import { swapperValidationSchema } from '../../../utils/validations'
 
 export default function SwapperForm() {
   const classes = useStyles();
+  const [message, setMessage] = useState('');
 
-  function createSwapper(params: any) {
-    Axios
-      .post('/swappers', {
-        swapper: {
-          name: params.name,
-          surname: params.username,
-          phone_number: params.phoneNumber,
-          address: params.address,
-          city: params.city,
-          country: params.country,
-          date_of_birth: params.dateOfBirth,
-          email: '',
-          username: '',
-          user_id: ''
-        },
-        headers: headers
-      })
-      .then(() => { History.push(HOME_PATH) })
-      .catch(error => console.log(error));
+  function createSwapperHandler(params: any) {
+    UserService
+      .createSwapper(params)
+      .then(
+        (error: any) => {
+          if (error) {
+            const errorMessage = (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+            setMessage(errorMessage);
+          } else {
+            History.push(PROFILE_PATH);
+          }
+        }
+      );
   }
- 
+
   return (
     <div className={classes.page}>
       <Formik
         initialValues={{
           name: '',
           surname: '',
-          // username: '',
-          // email: '',
           dateOfBirth: '',
           city: '',
           country: '',
@@ -86,7 +80,7 @@ export default function SwapperForm() {
               onBlur={() => setFieldTouched('dateOfBirth', true)}
               value={values.dateOfBirth}
               name='dateOfBirth'
-              placeholder='Date of Birth'
+              placeholder='Date of Birth (DD/MM/YYYY)'
             />
             { errors.dateOfBirth && touched.dateOfBirth ? <p className={classes.error}>{errors.dateOfBirth}</p> : ''}
             <input
@@ -129,10 +123,11 @@ export default function SwapperForm() {
               placeholder='Mobile Number'
             />
             { errors.phoneNumber && touched.phoneNumber ? <p className={classes.error}>{errors.phoneNumber}</p> : ''}
+            { message && (<div className={classes.error}> {message} </div>) }
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
-              onClick={() => createSwapper(values)}
+              onClick={() => createSwapperHandler(values)}
             > Complete your Profile! </DefaultButton>
           </form>
         )}

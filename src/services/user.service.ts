@@ -1,29 +1,53 @@
 import Axios from '../utils/axios';
 import { headers } from './headers';
-// import { History } from '../utils/history'
-// import authHeader from './auth-header';
-// import { PROFILE_PATH } from '../utils/paths';
+import AuthService from '../services/auth.service'
 
-async function getUser(id: string) {
+const currentUser = AuthService.getCurrentUser();
+
+async function createSwapper(params: any) {
   try {
     const response = await Axios
-      .get(`/users/${id}`, {
+      .post('/swappers', {
+        swapper: {
+          name: params.name,
+          surname: params.surname,
+          phone_number: params.phoneNumber,
+          address: params.address,
+          city: params.city,
+          country: params.country,
+          date_of_birth: params.dateOfBirth,
+          email: currentUser.email,
+          username: currentUser.username,
+          user_id: currentUser.user_id
+        },
         headers: headers
-      });
-    
-    console.log(response.data);
-    
-    return response.data;
-  } catch (error) {
-    return console.log(error);
-  }
+      })
+
+    if (response.data) {
+      localStorage.setItem('swapper', JSON.stringify(response.data));
+    }
+  } catch (error) { return error }
 }
 
-function getSwapperProfile() {
- 
+async function fetchCurrentSwapper() {
+  try {
+    const response = await Axios
+      .get('/swappers/current_swapper', { headers: headers })
+
+    if (response.data) {
+      localStorage.setItem('swapper', JSON.stringify(response.data));
+    }
+  } catch (error) { return error }
+}
+
+function currentSwapper() {
+  const swapper = JSON.parse(localStorage.getItem('swapper') || '{}');
+
+  return swapper.user_id ? swapper : null
 }
 
 export default {
-  getUser,
-  getSwapperProfile
+  fetchCurrentSwapper,
+  currentSwapper,
+  createSwapper
 };

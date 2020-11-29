@@ -125,8 +125,8 @@ export default function RegisterForm() {
                 <FontAwesomeIcon icon={faEyeSlash} />
               }
             </i>
-            {message && (<div className={classes.error}> {message} </div>)}
-            <p className={classes.p}>
+            { message && (<div className={classes.error}> {message} </div>) }
+            <div className={classes.p}>
               <FormControlLabel
                 control={
                   <CustomCheckbox
@@ -146,7 +146,7 @@ export default function RegisterForm() {
                 Terms and Conditions
               </Link>
               )
-            </p>
+            </div>
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty && checkedCheckbox)}

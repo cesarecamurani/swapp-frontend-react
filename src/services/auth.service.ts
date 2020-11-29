@@ -12,26 +12,31 @@ async function register(username: string, email: string, password: string) {
         },
         headers: headers
       });
-    } catch (error) {
-    return error
-  }
+  } catch (error) { return error }
 }
 
 async function login(email: string, password: string) {
-  const response = await Axios
-    .post('/auth/login', {
-      email: email,
-      password: password,
-      headers: headers
-    });
+  try {
+    const response = await Axios
+      .post('/auth/login', {
+        email: email,
+        password: password,
+        headers: headers
+      })
 
-  if (response.data.auth_token) {
-    localStorage.setItem('user', JSON.stringify(response.data));
-  }
+    if (response.data.auth_token) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
 
-  console.log(response.data);
+    if (response.data.swapper) {
+      localStorage.setItem('swapper', JSON.stringify(response.data.swapper));
+    }
 
-  return response.data;
+    console.log(response.data);
+
+    return response.data;
+
+  } catch (error) { return error }
 }
 
 async function logout() {
@@ -43,6 +48,8 @@ async function logout() {
     console.log(response.data.message)
 
     localStorage.removeItem('user');
+
+    localStorage.removeItem('swapper');
 
   } catch (error) {
     return console.log(error);
