@@ -4,6 +4,12 @@ import AuthService from '../services/auth.service'
 
 const currentUser = AuthService.getCurrentUser();
 
+Axios.interceptors.request.use(req => {
+  console.log('Ciao');
+
+  return req;
+});
+
 async function createSwapper(params: any) {
   try {
     const response = await Axios
@@ -29,17 +35,6 @@ async function createSwapper(params: any) {
   } catch (error) { return error }
 }
 
-async function fetchCurrentSwapper() {
-  try {
-    const response = await Axios
-      .get('/swappers/current_swapper', { headers: headers })
-
-    if (response.data) {
-      localStorage.setItem('swapper', JSON.stringify(response.data));
-    }
-  } catch (error) { return error }
-}
-
 function currentSwapper() {
   const swapper = JSON.parse(localStorage.getItem('swapper') || '{}');
 
@@ -47,7 +42,6 @@ function currentSwapper() {
 }
 
 export default {
-  fetchCurrentSwapper,
   currentSwapper,
   createSwapper
 };

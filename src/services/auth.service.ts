@@ -1,6 +1,12 @@
 import Axios from '../utils/axios';
 import { headers } from './headers';
 
+Axios.interceptors.request.use((request_token) => {
+  console.log('Ciao');
+
+  return request_token;
+});
+
 async function register(username: string, email: string, password: string) {
   try {
     await Axios
@@ -20,8 +26,7 @@ async function login(email: string, password: string) {
     const response = await Axios
       .post('/auth/login', {
         email: email,
-        password: password,
-        headers: headers
+        password: password
       })
 
     if (response.data.auth_token) {
