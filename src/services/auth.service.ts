@@ -1,10 +1,15 @@
 import Axios from '../utils/axios';
 import { headers } from './headers';
 
-Axios.interceptors.request.use((request_token) => {
-  console.log('Ciao');
+Axios.interceptors.request.use((request) => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = user.auth_token;
 
-  return request_token;
+  if (user && user.auth_token) {
+    request.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  return request;
 });
 
 async function register(username: string, email: string, password: string) {

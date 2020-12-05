@@ -4,10 +4,15 @@ import AuthService from '../services/auth.service'
 
 const currentUser = AuthService.getCurrentUser();
 
-Axios.interceptors.request.use(req => {
-  console.log('Ciao');
+Axios.interceptors.request.use((request) => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = user.auth_token;
 
-  return req;
+  if (user && user.auth_token) {
+    request.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  return request;
 });
 
 async function createSwapper(params: any) {
