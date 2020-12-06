@@ -16,6 +16,7 @@ export default function Profile() {
         {currentSwapper ? (
           <>
             <div className={classes.welcomeMessage}> Profile Page </div>
+            <br />
             <div> Username: { currentSwapper.username } </div>
             <div> First Name: { currentSwapper.name } </div>
             <div> Last Name: { currentSwapper.surname } </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-// import { format } from 'date-fns'
+import Cleave from 'cleave.js/react';
 import { History } from '../../../utils/history'
 import UserService from '../../../services/user.service'
 import { PROFILE_PATH } from '../../../utils/paths';
@@ -73,9 +73,10 @@ export default function SwapperForm() {
               placeholder='Last Name'
             />
             { errors.surname && touched.surname ? <p className={classes.error}>{errors.surname}</p> : ''}
-            <input
+            <Cleave
               className={classes.formInput}
               type='text'
+              options={{ date: true, datePattern: ['d', 'm', 'Y'] }}
               onChange={handleChange}
               onBlur={() => setFieldTouched('dateOfBirth', true)}
               value={values.dateOfBirth}

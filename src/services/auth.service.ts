@@ -41,11 +41,6 @@ async function login(email: string, password: string) {
     if (response.data.swapper) {
       localStorage.setItem('swapper', JSON.stringify(response.data.swapper));
     }
-
-    console.log(response.data);
-
-    return response.data;
-
   } catch (error) { return error }
 }
 

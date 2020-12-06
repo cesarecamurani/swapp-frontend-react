@@ -10,7 +10,6 @@ import { PROFILE_PATH, REGISTER_PATH } from '../../../utils/paths';
 import AuthService from '../../../services/auth.service'
 import { History } from '../../../utils/history'
 import { loginValidationSchema } from '../../../utils/validations'
-// import UserService from '../../../services/user.service';
 
 export default function LoginForm() {
   const classes = useStyles();
@@ -24,13 +23,17 @@ export default function LoginForm() {
   function loginHandler(username: string, password: string) {
     AuthService
       .login(username, password)
-      .then(() => { History.push(PROFILE_PATH); },
+      .then(
         (error: any) => {
-          const resMessage = (error.response && error.response.data && error.response.data.message) ||
-            error.message ||
-            error.toString();
+          if (error) {
+            const errorMessage = (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
 
-          setMessage(resMessage);
+            setMessage(errorMessage);
+          } else {
+            History.push(PROFILE_PATH);
+          }
         }
       );
   }
@@ -84,7 +87,7 @@ export default function LoginForm() {
                 <FontAwesomeIcon icon={faEyeSlash} />
               }
             </i>
-            {message && (<div className={classes.error}> {message} </div>)}
+            { message && (<div className={classes.error}> {message} </div>) }
             <DefaultButton
               type='submit'
               disabled={!(isValid && dirty)}
