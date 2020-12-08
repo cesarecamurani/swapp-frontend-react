@@ -3,7 +3,7 @@ import * as Nord from '../../utils/nordPalette'
 
 export default makeStyles(() => ({
   searchBar: {
-    fontFamily: 'Arcon',
+    fontFamily: 'Voltaire',
     outline: 0,
     color: `${Nord.snowStorm0}`,
     background: `${Nord.polarNight3}`,

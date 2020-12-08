@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
-import { GiWingfoot } from 'react-icons/gi';
+import { GiShakingHands } from 'react-icons/gi';
 import NavbarButtons from '../NavbarButtons/NavbarButtons';
 import { Link } from 'react-router-dom';
 import { HOME_PATH, LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '../../utils/paths';
@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <div className={classes.navbar}>
       <Link className={classes.homeLink} to={HOME_PATH}>
-        <div className={classes.title}><GiWingfoot /> SWApp </div>
+        <div className={classes.title}><GiShakingHands /> SWApp </div>
         <p className={classes.motto}> All you need is Swapp! </p>
       </Link>
       {currentUser ? (

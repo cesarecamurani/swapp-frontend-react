@@ -1,13 +1,13 @@
 import React from 'react';
 import useStyles from './styles';
-import { GiWingfoot } from 'react-icons/gi';
+import { GiShakingHands } from 'react-icons/gi';
 
 export default function Footer() {
   const classes = useStyles();
 
   return (
     <div className={classes.footer}>
-      <GiWingfoot /> SWApp by Cesare Camurani
+      <GiShakingHands /> SWApp {new Date().getFullYear()} by <b>カムラニチェサレ</b>
     </div>
   )
 }

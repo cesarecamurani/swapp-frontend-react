@@ -137,7 +137,7 @@ export default function RegisterForm() {
                 label={
                   <Box
                     component='div'
-                    fontFamily='Arcon'
+                    fontFamily='Voltaire'
                     fontSize='18px'
                   > You must agree with the website policy </Box>}
               /><br/>

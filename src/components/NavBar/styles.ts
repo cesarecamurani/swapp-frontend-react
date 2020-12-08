@@ -17,14 +17,18 @@ export default makeStyles(() => ({
     zIndex: 90
   },
   title: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    textDecoration: 'inherit',
+    '&:hover': {
+      color: `${Nord.frost2}`
+    }
   },
   homeLink: {
     color: 'inherit',
     textDecoration: 'inherit',
   },
   motto: {
-    fontSize: '14px', 
+    fontSize: '14px',
     margin: 'inherit'
   },
   textLink: {

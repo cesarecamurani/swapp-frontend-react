@@ -16,6 +16,7 @@ Axios.interceptors.request.use((request) => {
 });
 
 async function createSwapper(params: any) {
+  console.log(params.country)
   try {
     const response = await Axios
       .post('/swappers', {
